@@ -1,0 +1,27 @@
+from sympy import *
+x = Symbol('x')
+f = lambda x :  x**3 - 9*x + 5
+
+
+def falsa_posicao(f, a_0, b_0, iteracoes, epsilon): 
+    if f(a_0) * f(b_0) > 0: 
+        print('ERRO: NÃO HÁ UMA RAIZ ENTRE a E b')
+
+    for iteravel in range(0,iteracoes):
+        x_n = ((a_0 * f(b_0)) - (b_0 * (f(a_0)))) / (f(b_0)-f(a_0))
+        f_xn = f(x_n)
+
+        print(f'f(x(n)) : {f_xn}')
+        
+        if abs(f_xn) < epsilon:
+            return x_n 
+        
+        if f_xn < 0 : 
+          b_0 = x_n 
+        else: 
+          a_0 = x_n
+
+
+aux = falsa_posicao(f, 0,1 ,50, 0.0005)
+print(f'x(0) : {aux}')
+
