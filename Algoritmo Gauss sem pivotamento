@@ -1,0 +1,23 @@
+#Algoritmo de gauss com base no algoritmo do livro do Filho
+def gauss_sp(ordem,matriz, matriz_ti): 
+  for k in range(0,ordem - 1): 
+    for i in range(k+1, ordem): 
+      m = matriz[i][k]/matriz[k][k]
+      round(m, 5)
+      matriz[i][k] = 0 
+
+      for j in range(k+1, ordem): 
+        matriz[i][j] = matriz[i][j] - m * matriz[k][j]
+        round(matriz[i][j],5)
+      matriz_ti[i] = matriz_ti[i] - m * matriz_ti[k]
+      round(matriz_ti[i])
+  result = np.linalg.solve(matriz,matriz_ti)
+  for i in range(0,ordem): 
+      result[i] = round(result[i],5)
+
+  print(result)
+  
+
+
+
+
