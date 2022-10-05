@@ -1,0 +1,35 @@
+x= np.array([0,0,0])
+v = np.array([0,0,0])
+matriz = np.array([[1.0,-0.5, 0.5], [1.0,1.0,1.0], [-0.5, -0.5,3.0]])
+matriz_ti = np.array([3.0,12.0,3.0])
+
+#Baseado no pseudocódigo do livro do filho
+def Gauss_seidel(ordem, matriz, matriz_ti, iteracoes):
+  for i in range(0,ordem):
+    x[i] = matriz_ti[i] / matriz[i][i]
+  
+  iter = 0
+  
+  for k in range(0, iteracoes) :
+    norma_num = 0 
+    norma_den = 0
+    for i in range(0, ordem): 
+      soma = 0 
+      for j in range(0,ordem):
+        if i != j: 
+          soma = soma + matriz[i][j]*x[j]
+      
+      v[i] = x[i]
+      x[i] = (matriz_ti[i] - soma) / matriz[i][i]
+      t = abs(v[i]- x[i])
+
+      if t > norma_num:
+        norma_num = t
+      
+      if abs(x[i]) > norma_den:
+        norma_den = abs(x[i])
+    
+    norma_rel = norma_num / norma_den 
+
+  print(x)
+  
