@@ -1,0 +1,52 @@
+#Algoritmo de gauss com pivotamento parcial, com base no algoritmo do livro do Filho
+#           n      A        b
+def gauss(ordem, matriz, matriz_ti): 
+    det = 1
+
+    for j in range(0,ordem - 1): 
+      pivo = j 
+      Amax = abs(matriz[j][j])
+      for k in range(j+1, ordem):
+        if abs(matriz[k][j]) > Amax:
+          Amax = abs(matriz[k][j])
+          pivo = k 
+
+      if pivo != j: 
+        for k in range(0, ordem):
+          temp = matriz[j][k]
+          matriz[j][k] = matriz[pivo][k]
+          matriz[pivo][k] = temp
+        
+        temp = matriz_ti[j]
+        matriz_ti[j] = matriz_ti[pivo]
+        matriz_ti[pivo] = temp
+        
+        det = - det 
+      
+      det = det * matriz[j][j]
+      
+      if abs(matriz[j][j]) != 0 : 
+        r = 1/matriz[j][j]
+        round(r,5)
+
+        for i in range(j+1, ordem): 
+          mult = matriz[i][j] * r
+          round(mult,5)
+          matriz[i][j] = 0 
+          for k in range(j+1, ordem):
+            matriz[i][k] = matriz[i][k] - mult * matriz[j][k]
+            round(matriz[i][k], 5)
+          matriz_ti[i] = matriz_ti[i] - mult * matriz_ti[j]
+          round(matriz_ti[i],5) 
+      elif info == 0 :
+        info = j 
+    
+
+    det = det * matriz[ordem-1][ordem-1]
+
+
+    result = np.linalg.solve(matriz,matriz_ti)
+    for i in range(0,ordem): 
+      result[i] = round(result[i],5)
+
+    print(result)
