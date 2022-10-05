@@ -1,0 +1,21 @@
+abscissas = np.array([-1.0, 0.0 , 2.0])
+ordenadas = np.array([4.0,1.0,-1.0])
+valor_interpolar = 2
+
+#Pseudocódigo retirado do livro do filho
+def formaLagrange(pontos, abscissas, ordenadas, valor_interpolar):
+  r = 0 
+  for i in range(0, pontos): 
+    c = 1 
+    d = 1
+    for j in range(0, pontos):
+      if i != j:
+        c = c * (valor_interpolar - abscissas[j])
+        d = d * (abscissas[i] - abscissas[j])
+  
+    r = r + ordenadas[i] * c / d
+
+  print(f'O valor de z interpolado eh : {r}')
+
+formaLagrange(3, abscissas, ordenadas, valor_interpolar)
+
