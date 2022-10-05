@@ -1,0 +1,39 @@
+#Algoritmo baseado no pseudocódigo do livro do filho
+def cholesky(ordem, matriz,matriz_ti): 
+  det = 1 
+  info = 0 
+
+  for j in range(0, ordem): 
+    soma = 0
+    for k in range(0, j):
+      soma = soma + matriz[j][k] * matriz[j][k]
+    
+    t = matriz[j][j] - soma
+
+    if t>0: 
+      matriz[j][j] = math.sqrt(t)
+      r = 1 / matriz[j][j]
+      det = det * r
+    else:
+      info = j
+      print('matriz não é definida positiva')
+      return
+    
+    for i in range(j+1, ordem): 
+      soma = 0 
+
+      for k in range(0, j):
+        soma = soma + matriz[i][k] * matriz[j][k]
+      
+      matriz[i][j] = (matriz[i][j]-soma) * r
+  
+  for i in range(0,ordem):
+    for j in range(0, ordem): 
+      if i-j < 0: 
+        matriz[i][j] = 0
+  
+  result = np.linalg.solve(matriz,matriz_ti)
+  matriz = matriz.transpose()
+  result_final = np.linalg.solve(matriz, result)
+  print(result_final)
+
