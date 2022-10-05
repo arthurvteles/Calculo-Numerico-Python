@@ -1,0 +1,18 @@
+def formaNewton(pontos, abscissas, ordenadas, valor_interpolar):
+  r = 0 
+  dely = np.array([])
+  dely = np.copy(ordenadas)
+  
+  for k in range(0, pontos - 1):
+    for i in range(k, k+1):
+      dely[i] = ((dely[i] - dely[i-1])/(abscissas[i] - abscissas[i-k]))
+  
+
+  r = dely[pontos-1]
+
+  for i in range(pontos-1 ,1 ):
+    r = r*((valor_interpolar - abscissas[i]) + dely[i])
+
+  print(f'O valor de z interpolado eh : {r}')
+
+formaNewton(3, abscissas, ordenadas, valor_interpolar)
