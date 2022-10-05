@@ -1,0 +1,32 @@
+def gauss_jacobi(ordem, matriz, matriz_ti, iteracoes):
+  for i in range(0,ordem):
+    x[i] = matriz_ti[i] / matriz[i][i]
+  
+  iter = 0
+  
+  for k in range(0, iteracoes) :
+
+    for i in range(0, ordem): 
+      soma = 0 
+      for j in range(0,ordem):
+        if i != j: 
+          soma = soma + matriz[i][j]*x[j]
+      
+      v[i] = (matriz_ti[i] - soma) / matriz[i][i]
+
+    norma_num = 0 
+    norma_den = 0
+
+    for i in range(0,ordem): 
+      t = abs(v[i] - x[i])
+      if t > norma_num:
+        norma_num = t
+      
+      if abs(v[i]) > norma_den:
+        norma_den = abs(v[i])
+      x[i] = v[i]
+  
+  print(x)
+
+      
+
